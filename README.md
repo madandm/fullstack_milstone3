@@ -1,2 +1,2 @@
-Stock Market Charting_TableDesign.docxÅF the DB design
+Stock Market Charting_TableDesign.docx: for the DB design
 stockmarket.sql : DDL
