@@ -1,0 +1,11 @@
+C:\myWork\Full Stack\eclipse-workspace\stockmarket\cloud-basedata-service\src\main\java\com\iiht\stock\entity\SectorEntity.java
+C:\myWork\Full Stack\eclipse-workspace\stockmarket\cloud-basedata-service\src\main\java\com\iiht\stock\entity\StockExchangeEntity.java
+C:\myWork\Full Stack\eclipse-workspace\stockmarket\cloud-basedata-service\src\main\java\com\iiht\stock\WebConfig.java
+C:\myWork\Full Stack\eclipse-workspace\stockmarket\cloud-basedata-service\src\main\java\com\iiht\stock\BaseDataApplication.java
+C:\myWork\Full Stack\eclipse-workspace\stockmarket\cloud-basedata-service\src\main\java\com\iiht\stock\service\StockExchangeService.java
+C:\myWork\Full Stack\eclipse-workspace\stockmarket\cloud-basedata-service\src\main\java\com\iiht\stock\repository\SectorRepository.java
+C:\myWork\Full Stack\eclipse-workspace\stockmarket\cloud-basedata-service\src\main\java\com\iiht\stock\conf\CorsConfig.java
+C:\myWork\Full Stack\eclipse-workspace\stockmarket\cloud-basedata-service\src\main\java\com\iiht\stock\controller\BaseDataController.java
+C:\myWork\Full Stack\eclipse-workspace\stockmarket\cloud-basedata-service\src\main\java\com\iiht\stock\repository\StockExchangeRepository.java
+C:\myWork\Full Stack\eclipse-workspace\stockmarket\cloud-basedata-service\src\main\java\com\iiht\stock\CorsInterceptor.java
+C:\myWork\Full Stack\eclipse-workspace\stockmarket\cloud-basedata-service\src\main\java\com\iiht\stock\service\SectorService.java
