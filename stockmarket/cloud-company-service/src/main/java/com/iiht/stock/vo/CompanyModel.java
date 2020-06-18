@@ -4,11 +4,11 @@ public class CompanyModel {
 	private Integer id;
 	private String companyName;
 	private Integer companyCode;
-	private Integer exchangeId;
+	private String exchangeName;
 	private String turnOver;
 	private String ceo;
 	private String boardOfDrectors;
-	private Integer sectorId;
+	private String sectorName;
 	private String brief;
 	public Integer getId() {
 		return id;
@@ -28,11 +28,12 @@ public class CompanyModel {
 	public void setCompanyCode(Integer companyCode) {
 		this.companyCode = companyCode;
 	}
-	public Integer getExchangeId() {
-		return exchangeId;
+
+	public String getExchangeName() {
+		return exchangeName;
 	}
-	public void setExchangeId(Integer exchangeId) {
-		this.exchangeId = exchangeId;
+	public void setExchangeName(String exchangeName) {
+		this.exchangeName = exchangeName;
 	}
 	public String getTurnOver() {
 		return turnOver;
@@ -52,11 +53,12 @@ public class CompanyModel {
 	public void setBoardOfDrectors(String boardOfDrectors) {
 		this.boardOfDrectors = boardOfDrectors;
 	}
-	public Integer getSectorId() {
-		return sectorId;
+
+	public String getSectorName() {
+		return sectorName;
 	}
-	public void setSectorId(Integer sectorId) {
-		this.sectorId = sectorId;
+	public void setSectorName(String sectorName) {
+		this.sectorName = sectorName;
 	}
 	public String getBrief() {
 		return brief;

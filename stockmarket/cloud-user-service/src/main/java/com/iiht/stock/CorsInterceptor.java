@@ -11,7 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 /**
  * Cross domain.
  *
- * @author Madan
+ * @author XiChen
  */
 @Component
 public abstract class CorsInterceptor implements HandlerInterceptor {

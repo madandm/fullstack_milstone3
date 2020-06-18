@@ -26,4 +26,6 @@ public interface UserService {
 	 */
 	public UserEntity updateUser(UserEntity user);
 	
+	public void changpassword(String pwd, String userName);
+	
 }

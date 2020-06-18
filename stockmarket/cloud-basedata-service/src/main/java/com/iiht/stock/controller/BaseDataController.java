@@ -1,5 +1,7 @@
 package com.iiht.stock.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,7 @@ import com.iiht.stock.service.StockExchangeService;
 //@CrossOrigin(origins="http://localhost:4200")
 public class BaseDataController {
 	@Autowired
-	private SectorService companyService;
+	private SectorService sectorService;
 	@Autowired
 	private StockExchangeService stockExchangeService;
 	@ResponseBody
@@ -35,5 +37,15 @@ public class BaseDataController {
 			
 			return ResponseEntity.status(HttpStatus.CREATED).body(stockExchangeEntity); 
 		}
+	}
+	@ResponseBody
+	@PostMapping("/all")
+	public String findAll(){
+		String strExchangelist = "";
+		List<StockExchangeEntity> list = stockExchangeService.findAll();
+		for(int i = 0; i < list.size(); i++) {
+			strExchangelist = strExchangelist + list.get(i).getExchangeName() + ", ";
+		}
+		return strExchangelist;
 	}
 }

@@ -1,8 +1,6 @@
 package com.iiht.stock.vo;
 
 import java.math.BigDecimal;
-
-import javax.persistence.Id;
 public class StockpriceModel {
 	private Integer companyCode;
 	private String companyName;
@@ -10,12 +8,19 @@ public class StockpriceModel {
 	private BigDecimal openPrice;
 	private BigDecimal highPrice;
 	private BigDecimal lowPrice;
+	private String price;
 	private String priceDate;
 	
 	private String key1;
 	private String key2;
-	private String dataPeriod[];
+	private String dayPeriod[];
+	private String weekPeriod[];
+	private String monthPeriod[];
+	private String dayPrice[][];
+	private String weekPrice[][];
+	private String monthPrice[][];
 	private String dataPrice[][];
+	private String dataPeriod[];
 	private String periodFrom;
 	private String periodEnd;
 	private Integer week;
@@ -63,18 +68,6 @@ public class StockpriceModel {
 	public void setLowPrice(BigDecimal lowPrice) {
 		this.lowPrice = lowPrice;
 	}
-	public String[] getDataPeriod() {
-		return dataPeriod;
-	}
-	public void setDataPeriod(String[] dataPeriod) {
-		this.dataPeriod = dataPeriod;
-	}
-	public String[][] getDataPrice() {
-		return dataPrice;
-	}
-	public void setDataPrice(String[][] dataPrice) {
-		this.dataPrice = dataPrice;
-	}
 	public String getPeriodFrom() {
 		return periodFrom;
 	}
@@ -116,6 +109,60 @@ public class StockpriceModel {
 	}
 	public void setKey2(String key2) {
 		this.key2 = key2;
+	}
+	public String[] getDayPeriod() {
+		return dayPeriod;
+	}
+	public void setDayPeriod(String[] dayPeriod) {
+		this.dayPeriod = dayPeriod;
+	}
+	public String[] getWeekPeriod() {
+		return weekPeriod;
+	}
+	public void setWeekPeriod(String[] weekPeriod) {
+		this.weekPeriod = weekPeriod;
+	}
+	public String[] getMonthPeriod() {
+		return monthPeriod;
+	}
+	public void setMonthPeriod(String[] monthPeriod) {
+		this.monthPeriod = monthPeriod;
+	}
+	public String[][] getDayPrice() {
+		return dayPrice;
+	}
+	public void setDayPrice(String[][] dayPrice) {
+		this.dayPrice = dayPrice;
+	}
+	public String[][] getWeekPrice() {
+		return weekPrice;
+	}
+	public void setWeekPrice(String[][] weekPrice) {
+		this.weekPrice = weekPrice;
+	}
+	public String[][] getMonthPrice() {
+		return monthPrice;
+	}
+	public void setMonthPrice(String[][] monthPrice) {
+		this.monthPrice = monthPrice;
+	}
+	public String[][] getDataPrice() {
+		return dataPrice;
+	}
+	public void setDataPrice(String[][] dataPrice) {
+		this.dataPrice = dataPrice;
+	}
+	public String[] getDataPeriod() {
+		return dataPeriod;
+	}
+	public void setDataPeriod(String[] dataPeriod) {
+		this.dataPeriod = dataPeriod;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
 	}
 	
 }

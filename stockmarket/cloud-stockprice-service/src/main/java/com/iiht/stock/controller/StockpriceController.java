@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,60 +24,77 @@ public class StockpriceController {
 
 	@ResponseBody
 	@PostMapping("/search")
-	public StockpriceModel findStockPriceforSearch(@RequestBody StockpriceModel inputmodel) {
-		String key = "";
-		if(inputmodel != null) {
-			key = inputmodel.getKey1();
-		}
+	public StockpriceModel findStockPriceforSearch(@RequestParam(name="key") String key) {
 		List<StockpriceEntity> resutList = stockpriceService.findStockPrice(key,"","");
-		List<String> maxdayList = stockpriceService.findMaxDayofMonth(inputmodel.getKey1());
+		List<String> maxdayList = stockpriceService.findMaxDayofMonth(key);
 		StockpriceModel stockpriceModel = new StockpriceModel();
 		//xAxis:dataperiod
-		String dataPeriod[] = new String[resutList.size()];
+		String dayPeriod[] = new String[resutList.size()];
 		//yAxis:[open, current, low, high]
-		String dataPrice[][] = new String[resutList.size()][4];
+		String dayPrice[][] = new String[resutList.size()][4];
 		int i = 0;
 		//day period display
-		if("day".equals(inputmodel.getPeriod())) {
-			for (StockpriceEntity model : resutList) {
-				dataPeriod[i] = String.valueOf(model.getPriceDate());
-				dataPrice[i][0] = String.valueOf(model.getOpenPrice());
-				dataPrice[i][1] = String.valueOf(model.getCurrentPrice());
-				dataPrice[i][2] = String.valueOf(model.getLowPrice());
-				dataPrice[i][3] = String.valueOf(model.getHighPrice());
+		for (StockpriceEntity model : resutList) {
+			dayPeriod[i] = String.valueOf(model.getPriceDate());
+			dayPrice[i][0] = String.valueOf(model.getOpenPrice());
+			dayPrice[i][1] = String.valueOf(model.getCurrentPrice());
+			dayPrice[i][2] = String.valueOf(model.getLowPrice());
+			dayPrice[i][3] = String.valueOf(model.getHighPrice());
+			i++;
+		}
+		stockpriceModel.setDayPrice(dayPrice);
+		stockpriceModel.setDayPeriod(dayPeriod);
+		stockpriceModel.setPrice(dayPrice[resutList.size()][1]);
+		
+		i =0;
+		//week period display
+		for (StockpriceEntity model : resutList) {
+			//if the day is friday the display
+			if(6 == model.getWeek()) {
 				i++;
 			}
-		}else if("week".equals(inputmodel.getPeriod())) {
+		}
+		//xAxis:dataperiod
+		String weekPeriod[] = new String[i];
+		//yAxis:[open, current, low, high]
+		String weekPrice[][] = new String[i][4];
+		i = 0;
+		for (StockpriceEntity model : resutList) {
+			//if the day is friday the display
+			if(6 == model.getWeek()) {
+				weekPeriod[i] = String.valueOf(model.getPriceDate());
+				weekPrice[i][0] = String.valueOf(model.getOpenPrice());
+				weekPrice[i][1] = String.valueOf(model.getCurrentPrice());
+				weekPrice[i][2] = String.valueOf(model.getLowPrice());
+				weekPrice[i][3] = String.valueOf(model.getHighPrice());
+				i++;
+			}
+		}
+		stockpriceModel.setWeekPrice(weekPrice);
+		stockpriceModel.setWeekPeriod(weekPeriod);	
+
+		i =0;
+		//xAxis:dataperiod
+		String monthPeriod[] = new String[maxdayList.size()];
+		//yAxis:[open, current, low, high]
+		String monthPrice[][] = new String[maxdayList.size()][4];
 		//week period display
-			for (StockpriceEntity model : resutList) {
-				//if the day is friday the display
-				if(6 == model.getWeek()) {
-					dataPeriod[i] = String.valueOf(model.getPriceDate());
-					dataPrice[i][0] = String.valueOf(model.getOpenPrice());
-					dataPrice[i][1] = String.valueOf(model.getCurrentPrice());
-					dataPrice[i][2] = String.valueOf(model.getLowPrice());
-					dataPrice[i][3] = String.valueOf(model.getHighPrice());
+		//month period display
+		for (StockpriceEntity model : resutList) {
+			for(int j=0; j<maxdayList.size(); j++) {
+				if(model.getPriceDate().equals(maxdayList.get(j))) {
+					monthPeriod[i] = String.valueOf(model.getPriceDate());
+					monthPrice[i][0] = String.valueOf(model.getOpenPrice());
+					monthPrice[i][1] = String.valueOf(model.getCurrentPrice());
+					monthPrice[i][2] = String.valueOf(model.getLowPrice());
+					monthPrice[i][3] = String.valueOf(model.getHighPrice());
 					i++;
 				}
 			}
-			
-		}else if("month".equals(inputmodel.getPeriod())) {
-		//month period display
-			for (StockpriceEntity model : resutList) {
-				for(int j=0; j<maxdayList.size(); j++) {
-					if(model.getPriceDate().equals(maxdayList.get(j))) {
-						dataPeriod[i] = String.valueOf(model.getPriceDate());
-						dataPrice[i][0] = String.valueOf(model.getOpenPrice());
-						dataPrice[i][1] = String.valueOf(model.getCurrentPrice());
-						dataPrice[i][2] = String.valueOf(model.getLowPrice());
-						dataPrice[i][3] = String.valueOf(model.getHighPrice());
-						i++;
-					}
-				}
-			}
 		}
-		stockpriceModel.setDataPrice(dataPrice);
-		stockpriceModel.setDataPeriod(dataPeriod);
+		
+		stockpriceModel.setMonthPrice(monthPrice);
+		stockpriceModel.setMonthPeriod(monthPeriod);	
 		return stockpriceModel;
 	}
 

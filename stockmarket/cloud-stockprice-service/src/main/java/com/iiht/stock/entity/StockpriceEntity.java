@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -11,6 +12,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name="s_stock_price")
 public class StockpriceEntity {
+	private Integer id;
 	private int companyCode;
 	private String companyName;
 	private BigDecimal currentPrice;
@@ -22,6 +24,14 @@ public class StockpriceEntity {
 	private int week;
 	
 	@Id
+	@GeneratedValue
+	@Column(name="ID")
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	@Column(name="COMPANY_CODE")
 	public int getCompanyCode() {
 		return companyCode;
@@ -77,6 +87,5 @@ public class StockpriceEntity {
 	public void setWeek(int week) {
 		this.week = week;
 	}
-
 	
 }

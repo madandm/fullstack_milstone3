@@ -22,4 +22,7 @@ public class UserBusiness implements UserService{
 	public UserEntity updateUser(UserEntity user) {
 		return userRepository.save(user);
 	}
+	public void changpassword(String pwd, String userName) {
+		userRepository.changpassword(pwd, userName);
+	}
 }

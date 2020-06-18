@@ -1,12 +1,10 @@
 server:
-   port: 8081
+   port: 8083
 spring:
    application:
-      name: cloud-simple-service
+      name: cloud-stockprice-service
    profiles:
-      active: test
-   zipkin:
-      baseUrl: http://localhost:8080
+      active: default
    datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://127.0.0.1:3306/stockmarket?useUnicode=true&characterEncoding=utf8&&serverTimezone=GMT%2B8
@@ -22,3 +20,11 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
+eureka:
+   instance:
+      preferIpAddress: true		#注册服务的IP，而不是服务器的名称
+      client: 
+         registerWithEureka: true	#向Eureka注册服务
+         fetchRegistry: true		#拉取注册表的本副本
+         serviceUrl: 
+            defaultZone: http://localhost:8761/eureka/
