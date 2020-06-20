@@ -1,25 +1,25 @@
 pipeline {
 agent any
-   stages {
-      stage('pull code') {
-         steps {
-            checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class:'CheckoutOption',timeout:600],[$class:'CloneOption',depth:0,noTags:false,reference:'',shallow:false,timeout:600]], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'f1a92232-0c7f-46a1-9c81-a586ad18822c', url: 'https://github.com/madandm/fullstack_milstone3.git']]])
-         }
-      }
-     stage('Build') {
-           withMaven(
-            maven: 'maven',
-            mavenLocalRepo: '.repository') {
-                sh "mvn clean install -Dmaven.test.skip=true"
+  stages {
+        stage('git clone') {
+            steps {
+                git credentialsId: 'a6149833-8684-4a32-b3f2-25c127ce5bf8', url: 'https://github.com/madandm/fullstack_milstone3.git'
+            }
         }
-   }
-   
-   stage('deploy') {
-    sshagent(credentials: ['deploy_ssh_key']) {
-        sh 'ssh root@124.93.1.60'
-        sh 'docker run -d -p 8080:8080 -v /home/data:/webapps --name search tomcat:9.0'
-        sh 'echo hello'
-     }
-   }
+        stage('Build') {
+            steps {
+                dir('./'){
+                    bat 'mvn clean install -Dmaven.test.skip=true'
+                }
+            }
+        }
+       stage('deploy') {
+            steps {
+                // deploy by windows command
+                sh 'ssh root@124.93.1.60'
+                sh 'docker run -d -p 8080:8080 -v /home/data:/webapps --name search tomcat:9.0'
+                sh 'echo deploy success'
+            }
+        }
    }
 }
